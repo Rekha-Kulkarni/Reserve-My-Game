@@ -1,0 +1,6 @@
+@Reserve_My_Game_HostAddress = http://localhost:5254
+
+GET {{Reserve_My_Game_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
