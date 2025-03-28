@@ -23,7 +23,7 @@ export class AppComponent {
   }
 
   fetchData() {
-    this.http.get<string>('https://localhost:7006/WeatherForecast').subscribe(response => {
+    this.http.get<string>('https://localhost:7006/WeatherForecast/Test').subscribe(response => {
       this.data = response;
       console.log(this.data);
     });
