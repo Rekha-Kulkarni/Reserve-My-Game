@@ -34,6 +34,6 @@ public class WeatherForecastController : ControllerBase
     [ProducesResponseType(200, Type = typeof(string))]
     public IActionResult GetHelloAngular()
     {
-        return Ok(new { message = "Hello Angular" });
+        return Ok(new { message = "Hello Angular welcom" });
     }
 }
