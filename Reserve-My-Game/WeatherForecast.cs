@@ -2,7 +2,7 @@ namespace Reserve_My_Game
 {
     public class WeatherForecast
     {
-        public DateOnly DateOnly { get; set; }
+        public DateOnly Date { get; set; }
 
         public int TemperatureC { get; set; }
 
