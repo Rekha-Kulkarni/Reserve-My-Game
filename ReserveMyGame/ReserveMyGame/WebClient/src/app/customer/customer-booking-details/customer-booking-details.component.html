@@ -1,0 +1,32 @@
+<div class="border-top bg-light">
+    <div *ngIf="bookingDetails" class="d-flex justify-content-between p-2 p-lg-3">
+        <div class="list-lg-inline d-flex align-items-center text-secondary small">
+            <img *ngIf="movieDetails" class="list-inline-item rounded" [src]="movieDetails.Poster" width="125"> 
+            <div class="list-inline-item py-3 px-2 px-lg-3">
+                <ul *ngIf="movieDetails" class="list-unstyled list-inline">
+                    <li class="list-inline-item">{{movieDetails.Rated}}</li>
+                    <li class="list-inline-item">.</li>
+                    <li class="list-inline-item">2D</li>
+                    <li class="list-inline-item">.</li>
+                    <li class="list-inline-item">{{movieDetails.Language}}</li>
+                </ul>
+                <h4 class="text-dark"><b>{{bookingDetails.movieName}}</b></h4>
+                <span>{{bookingDetails.theatreName}}, {{bookingDetails.locationName}}</span>
+                <ul class="list-unstyled list-inline">
+                  <li class="list-inline-item">{{bookingDetails.dateTime.substring(0, bookingDetails.dateTime.length-1) | date: "longDate"}}</li>
+                    <li class="list-inline-item">|</li>
+                    <li class="list-inline-item">{{bookingDetails.showTime.substring(0, bookingDetails.showTime.length-1) | date: "shortTime"}}</li>
+                </ul>
+            </div>
+            <div class="list-inline-item py-3 ps-3 ps-lg-5 ms-lg-5 border-start">
+                <span class="small">SCREEN</span>
+                <h3 class="text-dark"><b>Screen-{{bookingDetails.screenCode}}</b></h3>
+                <span class="small">SEATS</span>
+                <h4 class="text-dark"><b>{{bookingDetails.seats}}</b></h4>
+            </div>
+        </div>
+        <div class="p-3">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/QR_code_for_mobile_English_Wikipedia.svg/1200px-QR_code_for_mobile_English_Wikipedia.svg.png" height="150">
+        </div>
+    </div>
+</div>

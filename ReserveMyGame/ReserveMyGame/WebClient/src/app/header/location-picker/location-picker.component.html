@@ -1,0 +1,50 @@
+<div class="location-picker justify-content-center p-5 position-absolute top-0 border w-100 h-100" (click)="this.toggleLocationPicker.emit($event)">
+    <div class="location-picker-container border text-center col-md-10 bg-white mt-2 small m-auto" (click)="$event.stopPropagation()">
+        <div class="position-relative bg-transparent border m-3 p-2 ps-0">
+            <i class="fas fa-search ms-1 me-4 small text-secondary"></i>
+            <input type="text" class="col-11 border-0 small" placeholder="Search for your city" (input)="searchLocation($event.target)">
+              <div *ngIf="locationSearch.length > 0" id="myDropdown" class="dropdown-content w-100">
+                <div *ngFor="let location of locationSearch"><a (click)="isSelected(location.id, location.name)" class="d-flex justify-content-start">{{location.name}}</a></div>                
+              </div>
+        </div>
+        <span>Popular Cities</span>
+        <ul class="list-unstyled list-inline d-flex justify-content-center">
+          <li class="list-inline-item text-center">
+            <label>
+              <input type="radio" value="{id: 1, name: 'Hyderabad'}" name="place" [(ngModel)]="selectedCity" (change)="isSelected(1, 'Hyderabad')">
+              <img *ngIf="selectedCity.id==1" src="https://cdn.iconscout.com/icon/free/png-512/charminar-1-119696.png" width="100" class="m-2">
+              <img *ngIf="selectedCity.id!=1" src="https://cdn.iconscout.com/icon/free/png-256/charminar-119682.png" width="100" class="m-2">
+              <br />Hyderabad
+            </label>
+          </li>
+          <!-- <li class="list-inline-item text-center">
+            <label>
+              <input type="radio" value="{id: 3, name: 'Mumbai'}" name="place" [(ngModel)]="selectedCity" (change)="isSelected(3, 'Mumbai')">
+              <img *ngIf="selectedCity.id==3" src="https://thumbs.dreamstime.com/b/gate-india-mumbai-bombay-vector-illustration-isolated-white-background-89579231.jpg" width="100" class="m-2">
+              <img *ngIf="selectedCity.id!=3" src="https://www.seekpng.com/png/full/90-905415_gateway-of-india-full-hd-maps-locations-mumbai.png" width="100" class="m-2">
+              <br />Mumbai
+            </label>
+          </li>
+          <li class="list-inline-item text-center">
+            <label>
+              <input type="radio" value="{id: 14, name: 'Visakhapatnam'}" name="place" [(ngModel)]="selectedCity" (change)="isSelected(14, 'Visakhapatnam')">
+              <img *ngIf="selectedCity.id==14" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLl3lUCELW7cYeMKOLuxlq5BcPV0frjI-g_jzm6MFfA6one5xEzCNljEw-NJYjraEf5so&usqp=CAU" width="100" class="m-2">
+              <img *ngIf="selectedCity.id!=14" src="https://c8.alamy.com/comp/JYRHJD/outline-visakhapatnam-skyline-with-blue-buildings-and-copy-space-vector-JYRHJD.jpg" width="100" class="m-2">
+              <br />Visakhapatnam
+            </label>
+          </li> -->
+        </ul>    
+        <div class="cities-list" *ngIf="viewCities">
+            <span class="text-center small text-dark">Other Cities</span>
+            <ul class="small list-unstyled list-inline text-secondary row mt-3">
+                <li *ngFor="let location of locations" class="list-inline-item text-left col-2">
+                    <label>
+                        <input type="radio" value="{{location}}" name="place"  [(ngModel)] = "selectedCity" (change)="isSelected(location.id, location.name)" >
+                        <span [ngClass]="{'text-danger': selectedCity.id == location.id}">{{location.name}}</span>
+                    </label>
+                </li>
+            </ul>
+        </div>
+        <button class="bg-transparent border-0 m-2 text-danger" (click)="toggleViewCities()">{{!viewCities ? "View" : "Hide"}} all Cities</button>
+    </div>
+</div>
