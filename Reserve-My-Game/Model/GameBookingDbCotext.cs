@@ -6,8 +6,8 @@ namespace Reserve_My_Game.Model
     {
         public GameBookingDbCotext(DbContextOptions<GameBookingDbCotext> options) : base(options) { }
         public DbSet<UserDetails> UserDetails { get; set; }
-        public DbSet<Games> Games { get; set; }
-        public DbSet<GameSessions> GameSessions { get; set; }
-        public DbSet<Bookings> Bookings { get; set; }
+        public DbSet<Game> Games { get; set; }
+        public DbSet<GameSession> GameSessions { get; set; }
+        public DbSet<Booking> Bookings { get; set; }
     }
 }

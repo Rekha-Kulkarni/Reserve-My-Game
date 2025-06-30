@@ -1,8 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Reserve_My_Game.Model
 {
-    public class GameSessions
+    [Table("GameSessions")]
+    public class GameSession
     {
         public int SessionId { get; set; }
 
@@ -16,9 +18,9 @@ namespace Reserve_My_Game.Model
         public int MaxPlayers { get; set; }
 
         // Navigation
-        public Games Game { get; set; }
+        public Game Game { get; set; }
 
-        public ICollection<Bookings> Bookings { get; set; }
+        public ICollection<Booking> Bookings { get; set; }
 
     }
 }

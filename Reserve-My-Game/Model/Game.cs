@@ -1,8 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Reserve_My_Game.Model
 {
-    public class Games
+    [Table("Games")]
+    public class Game
     {
         public int GameId { get; set; }
 
@@ -16,7 +18,7 @@ namespace Reserve_My_Game.Model
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
         // Navigation
-        public ICollection<GameSessions> GameSessions { get; set; }
+        public ICollection<GameSession> GameSessions { get; set; }
     }
 
 }

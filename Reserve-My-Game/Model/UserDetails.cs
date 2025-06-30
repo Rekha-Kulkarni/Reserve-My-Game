@@ -20,7 +20,7 @@ namespace Reserve_My_Game.Model
         public string Address { get; set; }
 
         // Navigation
-        public ICollection<Bookings> Bookings { get; set; }
+        public ICollection<Booking> Bookings { get; set; }
     }
 
 

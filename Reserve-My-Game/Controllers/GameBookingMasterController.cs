@@ -9,10 +9,15 @@ namespace Reserve_My_Game.Controllers
     public class GameBookingMasterController : ControllerBase
     {
         private readonly GameBookingDbCotext _context;
+        public GameBookingMasterController(GameBookingDbCotext context)
+        {
+            _context = context ?? throw new ArgumentNullException(nameof(context));
+        }
+
 
         [HttpGet("GetAllGames")]
         
-        public List<Games> GetGames()
+        public List<Game> GetGames()
         {
             var list = _context.Games.ToList();
             return list;
