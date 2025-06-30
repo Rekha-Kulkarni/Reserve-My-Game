@@ -16,18 +16,12 @@ namespace Reserve_My_Game.Controllers
 
 
         [HttpGet("GetAllGames")]
-        
+
         public List<Game> GetGames()
         {
             var list = _context.Games.ToList();
             return list;
         }
-        [HttpPost("AddUser")]
-        public UserDetails AddUserDetails(UserDetails user)
-        {
-           _context.UserDetails.Add(user);
-            _context.SaveChanges();
-            return user;
-        }
+        
     }
 }
