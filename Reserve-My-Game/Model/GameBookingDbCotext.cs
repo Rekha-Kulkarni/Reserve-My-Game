@@ -9,5 +9,12 @@ namespace Reserve_My_Game.Model
         public DbSet<Game> Games { get; set; }
         public DbSet<GameSession> GameSessions { get; set; }
         public DbSet<Booking> Bookings { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<GameSession>()
+                .HasKey(gs => gs.SessionId);
+            modelBuilder.Entity<UserDetails>().HasKey(u => u.UserId);
+        }
+   
     }
 }

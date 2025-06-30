@@ -4,6 +4,7 @@ namespace Reserve_My_Game.Model
 {
     public class UserDetails
     {
+        [Key]
         public int UserId { get; set; }
 
         [Required, MaxLength(100)]
