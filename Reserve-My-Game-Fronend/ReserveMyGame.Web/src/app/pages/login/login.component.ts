@@ -21,6 +21,11 @@ export class LoginComponent {
     password: ""
   } 
 
+  loginObj: any = {
+    emailId: "",
+    password: ""
+  } 
+
   http = inject(HttpClient);
   onRegister  () {
     debugger;
@@ -30,6 +35,18 @@ export class LoginComponent {
       debugger;
       if(error.status=400){
         alert("invalid body")
+      }
+    })
+  }
+
+  onLogin  () {
+    debugger;
+    this.http.post('https://localhost:7006/api/user/Login', this.loginObj).subscribe((res: any) => {
+      alert("Logged In.")
+    }, error => {
+      debugger;
+      if(error.status=400){
+        alert("wrong credentials")
       }
     })
   }
