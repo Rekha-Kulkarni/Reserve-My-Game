@@ -1,1 +1,63 @@
-<p>login works!</p>
+<div class="parent">
+<div class="signup-container">
+   @if(toggleForm){
+     <form id="signup-form" class="signup-form">
+      <h2>Create an Account</h2>
+      
+      <div class="input-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" placeholder="Enter your username" required>
+        <small id="username-error" class="error-message"></small>
+      </div>
+
+      <div class="input-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+        <small id="email-error" class="error-message"></small>
+      </div>
+
+      <div class="input-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Enter your password" required>
+        <small id="password-error" class="error-message"></small>
+      </div>
+
+      <div class="input-group">
+        <label for="confirm-password">Confirm Password</label>
+        <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm your password" required>
+        <small id="confirm-password-error" class="error-message"></small>
+      </div>
+
+      <button type="submit" class="submit-btn">Sign Up</button>
+
+      <div class="login-link">
+        <p (click)="toggleForm=false">Already have an account? <a>Login here</a></p>
+      </div>
+    </form> 
+   }
+   @else{
+    <form id="signup-form" class="signup-form">
+      <h2>LogIn</h2>
+      
+      <div class="input-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+        <small id="email-error" class="error-message"></small>
+      </div>
+
+      <div class="input-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Enter your password" required>
+        <small id="password-error" class="error-message"></small>
+      </div>
+
+      <button type="submit" class="submit-btn">Log In</button>
+
+      <div class="login-link">
+        <p (click)="toggleForm=true">If you are new here? <a>Sign Up</a></p>
+      </div>
+    </form>
+}
+  </div>
+
+</div>
