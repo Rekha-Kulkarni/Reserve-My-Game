@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Reserve_My_Game.Model
 {
@@ -12,16 +13,14 @@ namespace Reserve_My_Game.Model
 
         [Required, EmailAddress, MaxLength(100)]
         public string EmailId    { get; set; }
-
-        [Required, MaxLength(100)]
         public string City { get; set; }
         [Required, MaxLength(100)]
         public string MobileNo { get; set; }
-        [Required, MaxLength(100)]
         public string Address { get; set; }
 
-        // Navigation
-        public ICollection<Booking> Bookings { get; set; }
+        [Required, MaxLength(100)]
+        public string Password { get; set; }
+
     }
 
 

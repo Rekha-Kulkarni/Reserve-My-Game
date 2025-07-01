@@ -26,6 +26,6 @@ export class AppComponent {
     this.http.get<string>('https://localhost:7006/WeatherForecast/Test').subscribe(response => {
       this.data = response;
       console.log(this.data);
-    });
+    }); 
   }
 }
