@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -27,6 +28,7 @@ export class LoginComponent {
   } 
 
   http = inject(HttpClient);
+  router = inject(Router);  
   onRegister  () {
     debugger;
     this.http.post('https://localhost:7006/api/user/AddUser', this.registerObj).subscribe((res: any) => {
@@ -43,6 +45,8 @@ export class LoginComponent {
     debugger;
     this.http.post('https://localhost:7006/api/user/Login', this.loginObj).subscribe((res: any) => {
       alert("Logged In.")
+      localStorage.setItem('userApp',JSON.stringify(res))
+      this.router.navigateByUrl("home/user-list")
     }, error => {
       debugger;
       if(error.status=400){
