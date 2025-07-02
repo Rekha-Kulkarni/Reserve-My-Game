@@ -1,1 +1,41 @@
-<p>user-list works!</p>
+<div class="container">
+  <header class="header">
+    <h1 class="title">Book Your Game</h1>
+  </header>
+
+  <div class="gallery-row">
+    <div 
+      *ngFor="let item of imageItems" 
+      class="image-card"
+      (click)="onImageClick(item)"
+    >
+      <div class="image-wrapper">
+        <img [src]="item?.imageUrl" [alt]="item?.title" class="image" />
+        <div class="overlay">
+          <div class="overlay-content">
+            <h3 class="overlay-title">{{ item?.title }}</h3>
+            <p class="overlay-description">{{ item?.description }}</p>
+            <span class="category-tag">{{ item?.category }}</span>
+          </div>
+        </div>
+      </div>
+      <div class="card-content">
+        <h3 class="card-title">{{ item?.title }}</h3>
+        <p class="card-description">{{ item?.description }}</p>
+        <span class="category-badge">{{ item?.category }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="selectedItem" class="modal-backdrop" (click)="closeModal()">
+    <div class="modal" (click)="$event.stopPropagation()">
+      <button class="close-button" (click)="closeModal()">×</button>
+      <img [src]="selectedItem?.imageUrl" [alt]="selectedItem?.title" class="modal-image" />
+      <div class="modal-content">
+        <h2 class="modal-title">{{ selectedItem?.title }}</h2>
+        <p class="modal-description">{{ selectedItem?.description }}</p>
+        <span class="modal-category">{{ selectedItem?.category }}</span>
+      </div>
+    </div>
+  </div>
+</div>

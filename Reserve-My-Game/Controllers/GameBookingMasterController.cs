@@ -17,11 +17,18 @@ namespace Reserve_My_Game.Controllers
 
         [HttpGet("GetAllGames")]
 
-        public List<Game> GetGames()
+        public List<string> GetGames()
         {
-            var list = _context.Games.ToList();
+            var list = new List<string>() {"Pickelball","Cricket","Football","Tennis","Table Tennis","Volleyball"};
             return list;
         }
-        
+
+        [HttpGet("GetAllCities")]
+        public List<string> GetCities()
+        {
+            var list = new List<string>() { "Pune", "Mumbai", "banglore", "Chennai", "AhmedNagar" };
+            return list;
+        }
+
     }
 }

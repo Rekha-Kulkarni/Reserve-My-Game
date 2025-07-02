@@ -7,6 +7,7 @@ import { Router, RouterLink, RouterOutlet } from '@angular/router';
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
+
 export class HomeComponent {
 
   router=inject(Router)
