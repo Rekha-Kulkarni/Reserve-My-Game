@@ -47,7 +47,7 @@ selectedItem: ImageItem | null = null;
   onImageClick(item: ImageItem): void {
     this.selectedItem = item;
     debugger;
-    this.router.navigateByUrl("/booking")
+    this.router.navigateByUrl("home/booking")
     console.log('Image clicked:', item.title);
   }
 

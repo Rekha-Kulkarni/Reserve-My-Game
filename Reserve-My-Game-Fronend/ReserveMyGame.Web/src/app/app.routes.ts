@@ -7,8 +7,7 @@ import { BookingComponent } from './pages/booking/booking.component';
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-  { path: 'home', component: HomeComponent,children:[{  path:'user-list',component:UserListComponent}] },
-  { path: 'booking', component: BookingComponent },
+  { path: 'home', component: HomeComponent,children:[{  path:'user-list',component:UserListComponent}, {  path:'booking',component:BookingComponent}] },
   // Wildcard route for a 404 page (optional)
   { path: '**', redirectTo: 'login' }
 
