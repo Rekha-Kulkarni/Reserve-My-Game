@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 
 export interface ImageItem {
   id: number;
@@ -11,11 +12,12 @@ export interface ImageItem {
 
 @Component({
   selector: 'app-user-list',
-  imports: [CommonModule],
+  imports: [CommonModule,RouterLink,RouterOutlet],
   templateUrl: './user-list.component.html',
   styleUrl: './user-list.component.css'
 })
 export class UserListComponent {
+router = inject(Router);  
 selectedItem: ImageItem | null = null;
 
   imageItems: ImageItem[] = [
@@ -44,6 +46,8 @@ selectedItem: ImageItem | null = null;
 
   onImageClick(item: ImageItem): void {
     this.selectedItem = item;
+    debugger;
+    this.router.navigateByUrl("/booking")
     console.log('Image clicked:', item.title);
   }
 

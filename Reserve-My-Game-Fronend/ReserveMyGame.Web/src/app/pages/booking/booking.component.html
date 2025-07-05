@@ -1,0 +1,103 @@
+<div class="container">
+      <header class="header">
+        <h1 class="title">Playground Finder</h1>
+        <p class="subtitle">Find playgrounds in your city</p>
+      </header>
+
+      <div class="dropdown-section">
+        <div class="dropdown-container">
+          <div class="dropdown-group">
+            <label for="city-select" class="dropdown-label">Select City</label>
+            <select 
+              id="city-select" 
+              class="dropdown-select" 
+              [(ngModel)]="selectedCityId" 
+              (change)="onCityChange()"
+            >
+              <option value="">Choose a city...</option>
+              <option *ngFor="let city of cities" [value]="city.id">
+                {{ city.name }}
+              </option>
+            </select>
+          </div>
+
+          <div class="dropdown-group" *ngIf="selectedCity">
+            <label for="subarea-select" class="dropdown-label">Select Sub-Area</label>
+            <select 
+              id="subarea-select" 
+              class="dropdown-select" 
+              [(ngModel)]="selectedSubAreaId" 
+              (change)="onSubAreaChange()"
+            >
+              <option value="">Choose a sub-area...</option>
+              <option *ngFor="let subArea of selectedCity.subAreas" [value]="subArea.id">
+                {{ subArea.name }}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="playgrounds-section" *ngIf="displayedPlaygrounds.length > 0">
+        <h2 class="section-title">Available Playgrounds</h2>
+        <div class="playgrounds-grid">
+          <div 
+            *ngFor="let playground of displayedPlaygrounds" 
+            class="playground-card"
+            (click)="onPlaygroundClick(playground)"
+          >
+            <div class="playground-image-wrapper">
+              <img [src]="playground.imageUrl" [alt]="playground.name" class="playground-image" />
+              <div class="playground-overlay">
+                <div class="overlay-content">
+                  <h3 class="overlay-title">{{ playground.name }}</h3>
+                  <p class="overlay-description">{{ playground.description }}</p>
+                </div>
+              </div>
+            </div>
+            <div class="playground-content">
+              <h3 class="playground-title">{{ playground.name }}</h3>
+              <p class="playground-description">{{ playground.description }}</p>
+              <div class="facilities">
+                <span 
+                  *ngFor="let facility of playground.facilities" 
+                  class="facility-tag"
+                >
+                  {{ facility }}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="no-results" *ngIf="selectedSubAreaId && displayedPlaygrounds.length === 0">
+        <h3>No playgrounds found in this area</h3>
+        <p>Try selecting a different sub-area or city.</p>
+      </div>
+
+      <!-- Modal for playground details -->
+      <div *ngIf="selectedPlayground" class="modal-backdrop" (click)="closeModal()">
+        <div class="modal" (click)="$event.stopPropagation()">
+          <button class="close-button" (click)="closeModal()">×</button>
+          <img [src]="selectedPlayground.imageUrl" [alt]="selectedPlayground.name" class="modal-image" />
+          <div class="modal-content">
+            <h2 class="modal-title">{{ selectedPlayground.name }}</h2>
+            <p class="modal-description">{{ selectedPlayground.description }}</p>
+            <div class="modal-facilities">
+              <h4>Facilities:</h4>
+              <div class="facilities-list">
+                <span 
+                  *ngFor="let facility of selectedPlayground.facilities" 
+                  class="facility-badge"
+                >
+                  {{ facility }}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <router-outlet></router-outlet>
+  
