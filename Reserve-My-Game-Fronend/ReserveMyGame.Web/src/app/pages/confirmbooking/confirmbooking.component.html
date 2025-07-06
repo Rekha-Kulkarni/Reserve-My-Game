@@ -1,0 +1,36 @@
+
+      <div *ngIf="currentPage === 'confirmation'" class="confirmation-page">
+        <header class="header">
+          <h1 class="title">Booking Confirmed!</h1>
+          <p class="subtitle">Your playground has been successfully booked</p>
+        </header>
+
+        <div class="confirmation-container">
+          <div class="confirmation-card">
+            <div class="success-icon">✓</div>
+            <h2>Booking Details</h2>
+            <div class="confirmation-details">
+              <div class="detail-row">
+                <span>Playground:</span>
+                <span>{{ confirmedBooking?.playgroundName }}</span>
+              </div>
+              <div class="detail-row">
+                <span>Date:</span>
+                <span>{{ confirmedBooking?.date }}</span>
+              </div>
+              <div class="detail-row">
+                <span>Time:</span>
+                <span>{{ confirmedBooking?.timeSlot }}</span>
+              </div>
+              <div class="detail-row">
+                <span>Amount Paid:</span>
+                <span>$ {{ confirmedBooking?.price }}</span>
+              </div>
+            </div>
+            <div class="confirmation-actions">
+              <button class="primary-button" (click)="goToFinder()">Book Another Playground</button>
+              <button class="secondary-button" (click)="downloadReceipt()">Download Receipt</button>
+            </div>
+          </div>
+        </div>
+    </div>

@@ -29,6 +29,5 @@ namespace Reserve_My_Game.Controllers
             var list = new List<string>() { "Pune", "Mumbai", "banglore", "Chennai", "AhmedNagar" };
             return list;
         }
-
     }
 }

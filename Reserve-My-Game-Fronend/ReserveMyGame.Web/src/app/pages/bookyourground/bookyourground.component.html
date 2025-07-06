@@ -1,0 +1,86 @@
+
+    <div *ngIf="currentPage === 'booking'" class="booking-page">
+        <header class="header">
+          <button class="back-button" (click)="goBack()">← Back to Playgrounds</button>
+          <h1 class="title">Book {{ playgroundToBook?.name }}</h1>
+          <p class="subtitle">Select your preferred date and time</p>
+        </header>
+
+        <div class="booking-container">
+          <!-- Playground Info Card -->
+          <div class="playground-info-card">
+            <img [src]="playgroundToBook?.imageUrl" [alt]="playgroundToBook?.name" class="booking-playground-image" />
+            <div class="playground-info-content">
+              <h3>{{ playgroundToBook?.name }}</h3>
+              <p>{{ playgroundToBook?.description }}</p>
+              <div class="facilities">
+                <span *ngFor="let facility of playgroundToBook?.facilities" class="facility-tag">
+                  {{ facility }}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Date Selection -->
+          <div class="booking-section">
+            <h3 class="booking-section-title">Select Date</h3>
+            <div class="calendar-container">
+              <input 
+                type="date" 
+                class="date-input" 
+                [(ngModel)]="selectedDate"
+                [min]="minDate"
+                [max]="maxDate"
+                (change)="onDateChange()"
+              />
+            </div>
+          </div>
+
+          <!-- Time Slot Selection -->
+          <div class="booking-section" *ngIf="selectedDate">
+            <h3 class="booking-section-title">Available Time Slots</h3>
+            <div class="time-slots-grid">
+              <div 
+                *ngFor="let slot of timeSlots" 
+                class="time-slot"
+                [class.available]="slot.available"
+                [class.unavailable]="!slot.available"
+                [class.selected]="selectedTimeSlot?.id === slot.id"
+                (click)="selectTimeSlot(slot)"
+              >
+                <div class="time-slot-time">{{ slot.time }}</div>
+                <div class="time-slot-price" *ngIf="slot.available">$ {{ slot.price }}</div>
+                <div class="time-slot-status" *ngIf="!slot.available">Booked</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Booking Summary -->
+          <div class="booking-summary" *ngIf="selectedTimeSlot">
+            <h3 class="booking-section-title">Booking Summary</h3>
+            <div class="summary-details">
+              <div class="summary-row">
+                <span>Playground:</span>
+                <span>{{ playgroundToBook?.name }}</span>
+              </div>
+              <div class="summary-row">
+                <span>Date:</span>
+                <span>{{ formatDate(selectedDate) }}</span>
+              </div>
+              <div class="summary-row">
+                <span>Time:</span>
+                <span>{{ selectedTimeSlot.time }}</span>
+              </div>
+              <div class="summary-row total">
+                <span>Total:</span>
+                <span>$ {{ selectedTimeSlot.price }}</span>
+              </div>
+            </div>
+            <button class="confirm-booking-button" (click)="confirmBooking()">
+              Confirm Booking
+            </button>
+          </div>
+        </div>
+      </div>
+
+      
