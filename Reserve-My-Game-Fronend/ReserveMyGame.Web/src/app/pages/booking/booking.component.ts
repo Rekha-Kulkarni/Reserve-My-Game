@@ -52,16 +52,16 @@ export class BookingComponent {
             {
               id: 1,
               name: 'Central Park Playground',
-              imageUrl: 'https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&w=800',
-              description: 'Large playground with swings, slides, and climbing structures in the heart of Manhattan.',
-              facilities: ['Swings', 'Slides', 'Climbing Frame', 'Sandbox']
+              imageUrl: 'cricket.jpg',
+              description: '',
+              facilities: []
             },
             {
               id: 2,
               name: 'Riverside Park Adventure',
-              imageUrl: 'https://images.pexels.com/photos/1108117/pexels-photo-1108117.jpeg?auto=compress&cs=tinysrgb&w=800',
-              description: 'Waterfront playground with modern equipment and beautiful river views.',
-              facilities: ['Modern Equipment', 'Water Features', 'Picnic Area']
+              imageUrl: 'cricket.jpg',
+              description: '',
+              facilities: []
             }
           ]
         },
