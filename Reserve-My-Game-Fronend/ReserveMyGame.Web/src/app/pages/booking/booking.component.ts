@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
@@ -22,7 +22,6 @@ interface City {
   name: string;
   subAreas: SubArea[];
 }
-
 
 @Component({
   selector: 'app-booking',
@@ -160,6 +159,7 @@ export class BookingComponent {
     this.selectedSubArea = null;
     this.displayedPlaygrounds = [];
   }
+  router = inject(Router);  
 
   onSubAreaChange(): void {
     if (this.selectedCity) {
@@ -169,9 +169,19 @@ export class BookingComponent {
   }
 
   onPlaygroundClick(playground: Playground): void {
+    debugger;
     this.selectedPlayground = playground;
   }
 
+  goToBooking(pg: Playground,  event?: Event) {
+  event?.stopPropagation()
+    debugger;
+    this.selectedPlayground = pg;
+    this.router.navigate(['home/bookyourground'], {
+    state: { playground: pg }
+});
+
+  } 
   closeModal(): void {
     this.selectedPlayground = null;
   }

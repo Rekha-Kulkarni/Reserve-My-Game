@@ -67,6 +67,9 @@
                 </span>
               </div>
             </div>
+             <button class="book-button modal-book-button" (click)="goToBooking(playground, $event)">
+                Book This Playground
+              </button>
           </div>
         </div>
       </div>
@@ -76,9 +79,8 @@
         <p>Try selecting a different sub-area or city.</p>
       </div>
 
-      <!-- Modal for playground details -->
       <div *ngIf="selectedPlayground" class="modal-backdrop" (click)="closeModal()">
-        <div class="modal" (click)="$event.stopPropagation()">
+        <div class="modal">
           <button class="close-button" (click)="closeModal()">×</button>
           <img [src]="selectedPlayground.imageUrl" [alt]="selectedPlayground.name" class="modal-image" />
           <div class="modal-content">
@@ -101,6 +103,8 @@
           </div>
         </div>
       </div>
+            
+       
     </div>
     <router-outlet></router-outlet>
   
