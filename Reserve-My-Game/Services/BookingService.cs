@@ -1,47 +1,23 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Reserve_My_Game.Model;
-using Reserve_My_Game.Services;
-using System;
 
-namespace Reserve_My_Game.Controllers
+namespace Reserve_My_Game.Services
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class BookingController : ControllerBase
+    public class BookingService
     {
-
         private readonly GameBookingDbCotext _context;
-
-        private readonly IPaymentService _paymentService;
-        private readonly IBookingService _bookingService;
-        public BookingController(GameBookingDbCotext context, IPaymentService paymentService, IBookingService bookingService)
+        public BookingService(GameBookingDbCotext context)
         {
-            _context = context;
-            _paymentService = paymentService;
-            _bookingService = bookingService;
+            _context = context ?? throw new ArgumentNullException(nameof(context));
         }
-
-        [HttpPost("CreateBooking")]
-        public IActionResult CreateBooking([FromBody] BookingRequest request)
+        public void CreateBooking([FromBody] BookingRequest request)
         {
-            if (request == null)
-                return BadRequest("Invalid booking request.");
-
+        
             // validate IDs exist before saving
             var user = _context.UserDetails.FirstOrDefault(u => u.UserId == request.UserId);
             var game = _context.Games.FirstOrDefault(g => g.GameId == request.GameId);
             var city = _context.Cities.FirstOrDefault(c => c.CityId == request.CityId);
             var subArea = _context.SubAreas.FirstOrDefault(s => s.Id == request.SubAreaId);
-
-            if (user == null || game == null || city == null || subArea == null)
-                return NotFound("One or more IDs are invalid.");
-
-            var paymentResult = _paymentService.ProcessPayment(request.UserId, request.Amount);
-
-            if (!paymentResult.Success)
-                return BadRequest(new { Message = "Payment failed", Reason = paymentResult.ErrorMessage });
-
 
             var booking = new Booking
             {
@@ -55,14 +31,9 @@ namespace Reserve_My_Game.Controllers
 
             _context.Bookings.Add(booking);
             _context.SaveChanges();
-
-            return Ok(new { Message = "Booking created successfully", BookingId = booking.BookingId });
         }
-
-        [HttpGet("GetUserBookings/{userId}")]
-        public IActionResult GetUserBookings(int userId)
+        public void GetUserBookings(int userId)
         {
-
             var bookings = (from b in _context.Bookings
                             join g in _context.Games on b.GameId equals g.GameId
                             join c in _context.Cities on b.CityId equals c.CityId
@@ -76,16 +47,9 @@ namespace Reserve_My_Game.Controllers
                                 CityName = c.Name,
                                 SubAreaName = s.Name
                             }).ToList();
-
-            if (bookings == null || !bookings.Any())
-                return NotFound("No bookings found for this user.");
-
-            return Ok(bookings);
         }
 
     }
-
-    // DTO for request
     public class BookingRequest
     {
         public int UserId { get; set; }

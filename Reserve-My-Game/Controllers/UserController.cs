@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Reserve_My_Game.Model;
+using Reserve_My_Game.Services;
 
 namespace Reserve_My_Game.Controllers
 {
@@ -10,18 +11,18 @@ namespace Reserve_My_Game.Controllers
     public class UserController : ControllerBase
     {
         private readonly GameBookingDbCotext _context;
-        public UserController(GameBookingDbCotext context)
+        private readonly IUserService _userService;
+        public UserController(GameBookingDbCotext context, IUserService userService)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
+           _userService = userService;
         }
         [HttpPost("AddUser")]
         public IActionResult AddUserDetails(UserDetails user)
         {
-            var userExists = _context.UserDetails.SingleOrDefault(y => y.EmailId == user.EmailId);
-            if (userExists == null)
+            var success = _userService.AddUserDetails(user);
+            if (success)
             {
-                _context.UserDetails.Add(user);
-                _context.SaveChanges();
                 return Created("User Added", user);
             }
             else
@@ -32,8 +33,8 @@ namespace Reserve_My_Game.Controllers
         [HttpPost("Login")]
         public IActionResult Login(UserLogin userLogin)
         {
-            var user = _context.UserDetails.SingleOrDefault(x => x.EmailId == userLogin.emailId);
-            if (user == null)
+            var user = _userService.Login(userLogin);
+            if (!user)
                 return StatusCode(401, "wrong credentials");
             else
                 return StatusCode(200, user);

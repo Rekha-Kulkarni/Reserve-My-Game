@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Reserve_My_Game.Model;
+using Reserve_My_Game.Services;
 
 namespace Reserve_My_Game.Controllers
 {
@@ -8,10 +9,10 @@ namespace Reserve_My_Game.Controllers
     [ApiController]
     public class GameBookingMasterController : ControllerBase
     {
-        private readonly GameBookingDbCotext _context;
-        public GameBookingMasterController(GameBookingDbCotext context)
+        private readonly IGameService _gameService;
+        public GameBookingMasterController(IGameService gameService)
         {
-            _context = context ?? throw new ArgumentNullException(nameof(context));
+            _gameService = gameService;
         }
 
 
@@ -19,15 +20,30 @@ namespace Reserve_My_Game.Controllers
 
         public List<string> GetGames()
         {
-            var list = new List<string>() {"Pickelball","Cricket","Football","Tennis","Table Tennis","Volleyball"};
+            var list = _gameService.GetGames();
             return list;
         }
 
-        [HttpGet("GetAllCities")]
-        public List<string> GetCities()
+        [HttpGet("GetAllCities/{gameId}")]
+        public IActionResult GetCities(int gameId)
         {
-            var list = new List<string>() { "Pune", "Mumbai", "banglore", "Chennai", "AhmedNagar" };
-            return list;
+            var cities = _gameService.GetCities(gameId);
+
+            if (cities == null || !cities.Any())
+                return NotFound("No cities found for this game.");
+
+            return Ok(cities);
+        }
+
+        [HttpGet("GetAllSubAreas/{cityId}")]
+        public IActionResult GetSubAreas(int cityId)
+        {
+            var subAreas = _gameService.GetSubAreas(cityId);
+
+            if (subAreas == null || !subAreas.Any())
+                return NotFound("No sub-areas found for this city.");
+
+            return Ok(subAreas);
         }
     }
 }

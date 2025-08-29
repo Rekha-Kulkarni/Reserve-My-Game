@@ -10,8 +10,14 @@ namespace Reserve_My_Game.Model
 
         [Required]
         public int UserId { get; set; }
+        public int GameId { get; set; }
+        public int CityId { get; set; }
+        public int SubAreaId { get; set; }
 
-        [Required]  
+        public int PlaygroundId { get; set; }
+
+
+        [Required]
         public int SessionId { get; set; }
 
         public DateTime BookingTime { get; set; } = DateTime.UtcNow;
